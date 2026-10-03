@@ -15,3 +15,4 @@ PKG_PO_VERSION:=$(PKG_VERSION)-r$(PKG_RELEASE)
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
+$(eval $(call BuildPackage,luci-app-sublinkpro))
