@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: luci-app-sublinkpro\n"
+"Language: zh_Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "SublinkPro is running"
+msgstr "SublinkPro 运行中"
+
+msgid "SublinkPro is not running"
+msgstr "SublinkPro 未运行"
+
+msgid "Open Web UI"
+msgstr "打开 Web 管理界面"
+
+msgid "SublinkPro"
+msgstr "SublinkPro"
+
+msgid "Self-hosted proxy subscription manager and converter. Default account on first run is admin / 123456, please change it right after logging in."
+msgstr "自托管的代理订阅管理与转换工具。首次运行默认账号 admin / 123456，登录后请立即修改密码。"
+
+msgid "Basic Settings"
+msgstr "基本设置"
+
+msgid "Login Security"
+msgstr "登录安全"
+
+msgid "Advanced Settings"
+msgstr "高级设置"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Listen port"
+msgstr "监听端口"
+
+msgid "Allow access from LAN"
+msgstr "允许局域网访问"
+
+msgid "Automatically add a firewall rule for the listen port on the LAN zone while the service is running."
+msgstr "服务运行期间自动为 LAN 区域放行监听端口。"
+
+msgid "Web base path"
+msgstr "Web 访问路径前缀"
+
+msgid "Hide the Web UI entrance behind a path, e.g. /admin. Leave empty to disable. Does not affect the API or subscription links."
+msgstr "将管理界面入口隐藏在指定路径之后，例如 /admin，留空则不启用。不影响 API 和订阅链接。"
+
+msgid "Path must start with /"
+msgstr "路径必须以 / 开头"
+
+msgid "Initial admin password"
+msgstr "初始管理员密码"
+
+msgid "Only takes effect when the database is created for the first time. To reset it later use: /etc/init.d/sublinkpro reset_password <new password>"
+msgstr "仅在首次创建数据库时生效。之后如需重置请执行：/etc/init.d/sublinkpro reset_password <新密码>"
+
+msgid "Captcha mode"
+msgstr "验证码模式"
+
+msgid "Disabled (LAN only)"
+msgstr "关闭（仅限内网）"
+
+msgid "Image captcha"
+msgstr "图形验证码"
+
+msgid "Cloudflare Turnstile"
+msgstr "Cloudflare Turnstile"
+
+msgid "Max login failures"
+msgstr "登录失败次数上限"
+
+msgid "Failure window (minutes)"
+msgstr "失败统计窗口（分钟）"
+
+msgid "Ban duration (minutes)"
+msgstr "封禁时长（分钟）"
+
+msgid "Token expire days"
+msgstr "登录令牌有效天数"
+
+msgid "Data directory"
+msgstr "数据目录"
+
+msgid "SQLite database, config.yaml and GeoIP data are stored here. Point it to a USB drive or disk to reduce flash wear."
+msgstr "SQLite 数据库、config.yaml 和 GeoIP 数据都存放在这里。建议指向 U 盘或硬盘以减少闪存写入。"
+
+msgid "Log directory"
+msgstr "日志目录"
+
+msgid "Log level"
+msgstr "日志等级"
+
+msgid "Database DSN"
+msgstr "数据库 DSN"
+
+msgid "Leave empty to use SQLite. Example: mysql://user:pass@tcp(host:3306)/sublink?charset=utf8mb4&parseTime=True&loc=Local"
+msgstr "留空则使用 SQLite。示例：mysql://user:pass@tcp(host:3306)/sublink?charset=utf8mb4&parseTime=True&loc=Local"
+

@@ -1,0 +1,14 @@
+{
+	"admin/services/sublinkpro": {
+		"title": "SublinkPro",
+		"order": 60,
+		"action": {
+			"type": "view",
+			"path": "sublinkpro/main"
+		},
+		"depends": {
+			"acl": [ "luci-app-sublinkpro" ],
+			"uci": { "sublinkpro": true }
+		}
+	}
+}

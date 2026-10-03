@@ -1,0 +1,17 @@
+{
+	"luci-app-sublinkpro": {
+		"description": "Grant access to LuCI app sublinkpro",
+		"read": {
+			"ubus": {
+				"service": [ "list" ]
+			},
+			"uci": [ "sublinkpro" ],
+			"file": {
+				"/var/log/sublinkpro/*": [ "read" ]
+			}
+		},
+		"write": {
+			"uci": [ "sublinkpro" ]
+		}
+	}
+}
