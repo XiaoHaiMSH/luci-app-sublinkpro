@@ -5,10 +5,7 @@
 			"ubus": {
 				"service": [ "list" ]
 			},
-			"uci": [ "sublinkpro" ],
-			"file": {
-				"/var/log/sublinkpro/*": [ "read" ]
-			}
+			"uci": [ "sublinkpro" ]
 		},
 		"write": {
 			"uci": [ "sublinkpro" ]

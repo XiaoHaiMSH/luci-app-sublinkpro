@@ -1,6 +1,4 @@
-# SPDX-License-Identifier: GPL-3.0-only
-#
-# OpenWrt package for SublinkPro (https://github.com/ZeroDeng01/sublinkPro)
+# SPDX-License-Identifier: MIT
 
 include $(TOPDIR)/rules.mk
 
@@ -15,19 +13,15 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/sublinkPro-$(PKG_VERSION)
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:=XiaoHaiSly
+PKG_MAINTAINER:=xiaohaisly
 
 PKG_BUILD_DEPENDS:=golang/host node/host
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
 
-# go.mod 里 module 名就是 "sublink", 入口 main.go 在仓库根目录
 GO_PKG:=sublink
 GO_PKG_BUILD_PKG:=sublink
 GO_PKG_TAGS:=prod
-# golang-package.mk 默认只把 .go/go.mod/go.sum 拷进 Go 工作目录，
-# 而上游用 //go:embed 内嵌了下面这些非 Go 文件，必须额外带上，否则编译会报 "no matching files found"
-# (不要用 GO_PKG_INSTALL_ALL，会把 webs/node_modules 也拷一遍)
 GO_PKG_INSTALL_EXTRA:=^./static/ ^./template/ ^./skill-sublinkpro/ ^./VERSION
 
 include $(INCLUDE_DIR)/package.mk
@@ -37,17 +31,13 @@ define Package/sublinkpro
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
-  TITLE:=SublinkPro subscription manager and converter
+  TITLE:=SublinkPro 订阅管理与转换工具
   URL:=https://github.com/ZeroDeng01/sublinkPro
   DEPENDS:=+ca-bundle
-  USERID:=sublinkpro=5567:sublinkpro=5567
 endef
 
 define Package/sublinkpro/description
-  SublinkPro is a self-hosted proxy subscription management, conversion and
-  node-testing platform with a built-in Web UI (Clash / Surge / v2ray output).
-  This package ships the core service. Web UI listens on port 8000 by default,
-  default account is admin / 123456 on first run (change it immediately).
+  SublinkPro 节点订阅管理、转换与测速平台，自带 Web 管理界面。
 endef
 
 define Package/sublinkpro/config
@@ -61,13 +51,9 @@ endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
-	# 上游 VERSION 文件在 CI 里才写入, 这里补上, 否则程序显示的版本是空的
 	echo "v$(PKG_VERSION)" > $(PKG_BUILD_DIR)/VERSION
 endef
 
-# 先在线构建前端 (webs/, Vite + Yarn 4), 产物放到 static/, 再用 -tags=prod 内嵌进二进制。
-# 上游 package.json 声明 node>=24, 但 feeds 里的 node/host 可能是 22.x; 实测 Node 22 可以正常构建。
-# OpenWrt 的 node 包不带 corepack, 所以用 npm 临时装一份 yarn 4.10.3 (与上游 packageManager 一致)。
 define Build/Compile
 	cd $(PKG_BUILD_DIR)/webs && \
 		export PATH="$(STAGING_DIR_HOSTPKG)/bin:$$$$PATH" && \
@@ -85,11 +71,8 @@ define Build/Compile
 endef
 
 define Package/sublinkpro/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	# 上游 Go 二进制名是 sublink (module 名), 安装时改成官方的 sublinkPro
-	$(INSTALL_BIN) $(GO_PKG_BUILD_BIN_DIR)/sublink $(1)/usr/bin/sublinkPro
+	$(call GoPackage/Package/Install/Bin,$(1))
 
-	$(INSTALL_DIR) $(1)/etc/sublinkpro
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/sublinkpro.conf $(1)/etc/config/sublinkpro
 	$(INSTALL_DIR) $(1)/etc/init.d
